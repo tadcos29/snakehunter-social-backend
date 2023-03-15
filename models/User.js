@@ -30,13 +30,13 @@ const userSchema = new Schema(
     thoughts: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Thought',
+        ref: 'thought',
       },
     ],
     friends: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
       },
     ],
   },
@@ -52,7 +52,11 @@ userSchema.virtual('friendCount').get(function () {
     return this.friends.length
   })
   
-
+  // attempt to implement remove middleware
+userSchema.pre('remove', function(next) {
+    Thought.remove({username: this.username}).exec();
+    next();
+});
 // Initialize our User model
 const User = model('user', userSchema);
 

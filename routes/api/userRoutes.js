@@ -19,15 +19,15 @@ router.route('/').get(getUsers).post(createUser);
 // }
 
 // /api/users/:userId
-router.route('/:studentId').get(getSingleUser)
+router.route('/:userId').get(getSingleUser)
 // as well as populated thought and friend data
-.put(updateUser)
+// .put(updateUser)
 .delete(deleteUser) // attempt to delete associated thoughts (presumably cascading to reactions)
 
 // friends routes: /api/:userId/friends/:friendId
 
-router.route('/:studentId/friends/:friendId')
-.post(addFriend)
-.delete(removeFriend)
+// router.route('/:userId/friends/:friendId')
+// .post(addFriend)
+// .delete(removeFriend)
 
 module.exports = router;
