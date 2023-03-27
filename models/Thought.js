@@ -1,50 +1,7 @@
 const { Schema, Types, model } = require('mongoose');
-
-const thoughtSchema = new Schema(
-  {
-    _id: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    thoughtText: {
-      type: String,
-      required: true,
-      minLength: 1,
-      maxLength: 280,
-    },
- 
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-
-    username: {
-      type: String,
-      required: true
-    },
-
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Reaction',
-      },
-    ],
-
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-    id: false,
-  }
-);
+const dayjs = require('dayjs');
 
 
-thoughtSchema.virtual('reactionCount').get(function () {return this.reactions.length; });
-// format date: slightly risky attempt?
-// thoughtSchema.virtual('createdAt').get(
-//   return (this.createdAt.toString)
-// )
 
 const reactionSchema = new Schema(
   {
@@ -65,16 +22,62 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (createdAt) => dayjs(createdAt).format('MMMM D[th], YYYY [at] HH:mm')
     },
 
   },
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
 );
+
+
+
+
+
+const thoughtSchema = new Schema(
+  {
+    _id: {
+      type: Schema.Types.ObjectId,
+      default: () => new Types.ObjectId(),
+    },
+    thoughtText: {
+      type: String,
+      required: true,
+      minLength: 1,
+      maxLength: 280,
+    },
+ 
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: (createdAt) => dayjs(createdAt).format('MMMM D[th], YYYY [at] HH:mm')
+    },
+
+    username: {
+      type: String,
+      required: true
+    },
+
+    reactions: [reactionSchema],
+
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters:true
+    },
+    id: false,
+  }
+);
+
+
+thoughtSchema.virtual('reactionCount').get(function () {return this.reactions.length; });
+
 
 
 

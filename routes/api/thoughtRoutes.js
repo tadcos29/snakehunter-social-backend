@@ -28,14 +28,14 @@ router.route('/').get(getThoughts).post(createThought);
 router
   .route('/:thoughtId')
   .get(getSingleThought)
-  // .put(updateThought)
-  // .delete(deleteThought);
+  .put(updateThought)
+  .delete(deleteThought);
 
 
 // reaction routes: attach to thought id'd by thoughtID,
 // remove reaction id'd by reactionID from thought id'd by thoughtID
 
-// router.route('/:thoughtID/reactions').post(addReaction);
-// router.route('/:thoughtId/tags/:reactionId').delete(removeReaction);
+router.route('/:thoughtId/reactions').post(addReaction);
+router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
 
 module.exports = router;

@@ -54,7 +54,7 @@ userSchema.virtual('friendCount').get(function () {
   
   // attempt to implement remove middleware
 userSchema.pre('remove', function(next) {
-    Thought.remove({username: this.username}).exec();
+    Thought.remove({_id: this.username}).exec();
     next();
 });
 // Initialize our User model
