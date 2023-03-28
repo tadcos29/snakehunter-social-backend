@@ -24,7 +24,7 @@ The github repository for this application may be found at [https://github.com/t
 
 ## Functionality
 
-This rudimentary 'social network' backend is structured around 'user' and 'thought' models with a 'reactions' subcollection associated with the 'thoughts'. It seeks to implement the core social interaction dynamic: ysers may publish thoughts on their profiles for others to react to. All the standard CRUD operation routes are provided for users and thoughts, and create and delete routes are provided for reactions.
+This rudimentary 'social network' backend is structured around 'user' and 'thought' models with a 'reactions' subcollection associated with the 'thoughts'. It seeks to implement the core social interaction dynamic: users may publish thoughts on their profiles for others to react to. All the standard CRUD operation routes are provided for users and thoughts, and create and delete routes are provided for reactions.
 
 ### Example: User list in Insomnia.
 
